@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="color.css">
+    <title>color picker</title>
+</head>
+<body>
+    <form >
+            <label for="r">(R) Vermelho: </label> <input id="r" class="range r" type="range" value="0" min="0" max="255">
+                <input type="text" value="0" id="red" class="num_show" disabled></br>
+            <label for="g">(G) Verde: </label> <input id="g" class="range g" type="range" value="0" min="0" max="255">
+                <input type="text" value="0" id="green" class="num_show" disabled></br> 
+            <label for="b">(B) Azul: </label> <input id="b" class="range b" type="range" value="0" min="0" max="255">
+                <input type="text" value="0" id="blue" class="num_show" disabled></br>
+    </form>
+    <div class="caixa"></div>
+    <script src="color.js"></script>
+</body>
+</html>

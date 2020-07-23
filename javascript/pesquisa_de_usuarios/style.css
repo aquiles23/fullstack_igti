@@ -1,0 +1,25 @@
+section{
+  margin-bottom: 10px;
+  margin-top: 10px;
+  width: 40%;
+  border: 15px solid aqua;
+  display: inline-block;
+}
+li{
+  margin-left: 2rem;
+}
+button{
+  border-radius: 4rem;
+}
+button:disabled{
+  cursor: not-allowed
+}
+body{
+  background-color: chocolate;
+  color: darkslategray;
+  font-family: arial;
+  margin-left: 10%;
+}
+img{
+  border-radius: 50%;
+}
