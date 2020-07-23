@@ -3,7 +3,7 @@ let query = document.querySelector('input'),
   peopleSection = document.getElementById('People'),
   resultSection = document.getElementById('Results');
 
-query.addEventListener('keyup', event => {
+query.addEventListener('keyup', (event) => {
   if (query.value.trim() !== '') {
     btn.disabled = false;
   } else {
@@ -32,7 +32,7 @@ function render(filtered) {
     </h2>
     <ul>`;
 
-    filtered.forEach(element => {
+    filtered.forEach((element) => {
       peopleSection.innerHTML += `
       <li>
         <img src="${element.picture.thumbnail}" alt="thumbnail"> ${element.name.first} ${element.name.last}, ${element.dob.age} anos
@@ -75,14 +75,10 @@ async function handler() {
   people = json.results;
   btn.addEventListener('click', () => {
     let search = query.value;
-    let filtered = people.filter(obj => {
-      return (
-        obj.name.first.toLowerCase().includes(search.toLowerCase()) ||
-        obj.name.last.toLowerCase().includes(search.toLowerCase()) ||
-        `${obj.name.fist} ${obj.name.last}`
-          .toLowerCase()
-          .includes(search.toLowerCase())
-      );
+    let filtered = people.filter((obj) => {
+      return `${obj.name.first} ${obj.name.last}`
+        .toLowerCase()
+        .includes(search.toLowerCase());
     });
     render(filtered);
   });
