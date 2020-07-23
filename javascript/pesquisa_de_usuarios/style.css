@@ -3,7 +3,7 @@ section{
   margin-top: 10px;
   width: 40%;
   border: 15px solid aqua;
-  display: inline-block;
+  display: inline-table;
 }
 li{
   margin-left: 2rem;
