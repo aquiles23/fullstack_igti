@@ -26,6 +26,10 @@ async function createJSON() {
 
 
 function printCountCity(uf) {
+  let count = obj.find(element =>{
+    return element.uf === uf
+  });
+  console.log(count.cities.length);
 }
 
 function printMost5City() {}
@@ -43,6 +47,7 @@ function smallestNameCity() {}
 async function main() {
   await createJSON();
   //console.log(obj);
+  printCountCity('TO');
 }
 export default {
   main,
