@@ -32,9 +32,35 @@ function printCountCity(uf) {
   console.log(count.cities.length);
 }
 
-function printMost5City() {}
+function printMost5City() {
+  let local = obj,max,items =[],idx;
+  for(let i = 0;i<5;i++){
+    max = local.reduce((acc,el)=>{
+      return Math.max(acc,el.cities.length);
+    },0)
+    idx = local.findIndex(el =>{
+      return el.cities.length === max;
+    })
+    items.push(`${local[idx].uf} - ${max}`);
+    local.splice(idx,1)
+  }
+  console.log(items);
+}
 
-function printlesser5City() {}
+function printlesser5City() {
+  let local = obj,min,items =[],idx;
+  for(let i = 0;i<5;i++){
+    min = local.reduce((acc,el)=>{
+      return Math.min(acc,el.cities.length);
+    },10000)
+    idx = local.findIndex(el =>{
+      return el.cities.length === min;
+    })
+    items.push(`${local[idx].uf} - ${min}`);
+    local.splice(idx,1)
+  }
+  console.log(items);
+}
 
 function bigestNameCityAll() {}
 
@@ -47,7 +73,9 @@ function smallestNameCity() {}
 async function main() {
   await createJSON();
   //console.log(obj);
-  printCountCity('TO');
+  printCountCity('MG');
+  printMost5City();
+  printlesser5City();
 }
 export default {
   main,
