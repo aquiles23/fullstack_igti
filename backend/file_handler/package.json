@@ -1,0 +1,20 @@
+{
+  "name": "file_handler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aquiles23/fullstack_igti.git"
+  },
+  "author": "aquiles23",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aquiles23/fullstack_igti/issues"
+  },
+  "homepage": "https://github.com/aquiles23/fullstack_igti#readme",
+  "type": "module"
+}
