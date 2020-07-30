@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 
-let obj = []
+let obj = [], cities = [];
 async function createJSON() {
   try {
     const city = JSON.parse(
@@ -18,7 +18,14 @@ async function createJSON() {
       await fs.writeFile(`./cidades-estados-brasil-json/${curState.Sigla}.json`,JSON.stringify(fileState));
     }
     state.forEach(processRow);
-    return obj;
+    obj.sort((a,b)=>{
+      return a.uf > b.uf
+    });
+    obj.forEach(el =>{
+      el.cities.sort();
+      cities = cities.concat(el.cities);
+    });
+    cities.sort();
   } catch (err) {
     console.log(err);
   }
@@ -33,7 +40,7 @@ function printCountCity(uf) {
 }
 
 function printMost5City() {
-  let local = obj,max,items =[],idx;
+  let local =Array.from(obj),max,items =[],idx;
   for(let i = 0;i<5;i++){
     max = local.reduce((acc,el)=>{
       return Math.max(acc,el.cities.length);
@@ -48,7 +55,7 @@ function printMost5City() {
 }
 
 function printlesser5City() {
-  let local = obj,min,items =[],idx;
+  let local =Array.from(obj),min,items =[],idx;
   for(let i = 0;i<5;i++){
     min = local.reduce((acc,el)=>{
       return Math.min(acc,el.cities.length);
@@ -62,20 +69,71 @@ function printlesser5City() {
   console.log(items);
 }
 
-function bigestNameCityAll() {}
+function bigestNameCityAll() {
+  let local =Array.from(obj),max,items =[],found;
+  local.forEach(el =>{
+    max = el.cities.reduce((acc,element) =>{
+      return Math.max(acc,element.Nome.length);
+    },0);
+    found = el.cities.find(element =>{
+      return max === element.Nome.length;
+    });
+    items.push(`${found.Nome} - ${el.uf}`);
+  })
+  console.log(items);
+}
 
-function smallestNameCityAll() {}
+function smallestNameCityAll() {
+  let local = Array.from(obj),min,items =[],found;
+  local.forEach(el =>{
+    min = el.cities.reduce((acc,element) =>{
+      return Math.min(acc,element.Nome.length);
+    },10000);
+    found = el.cities.find(element =>{
+      return min === element.Nome.length;
+    });
+    items.push(`${found.Nome} - ${el.uf}`);
+  })
+  console.log(items);
+}
 
-function bigestNameCity() {}
+function bigestNameCity() {
+  let uf, max, found;
+  max = cities.reduce((acc,el) =>{
+    return Math.max(acc,el.Nome.length);
+  },0);
+  found = cities.find(el=>{
+    return max === el.Nome.length
+  });
+  uf = obj.find(el=>{
+    return el.cities.includes(found);
+  });
+  console.log(`${found.Nome} - ${uf.uf}`)
+}
 
-function smallestNameCity() {}
+function smallestNameCity() {
+  let uf, min, found;
+  min = cities.reduce((acc,el) =>{
+    return Math.min(acc,el.Nome.length);
+  },10000);
+  found = cities.find(el=>{
+    return min === el.Nome.length
+  });
+  uf = obj.find(el=>{
+    return el.cities.includes(found);
+  });
+  console.log(`${found.Nome} - ${uf.uf}`)
+}
 
 async function main() {
   await createJSON();
-  //console.log(obj);
   printCountCity('MG');
   printMost5City();
   printlesser5City();
+  bigestNameCityAll();
+  smallestNameCityAll();
+  bigestNameCity();
+  smallestNameCity();
 }
 export default {
   main,
