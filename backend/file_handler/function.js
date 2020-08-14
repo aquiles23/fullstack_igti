@@ -25,7 +25,9 @@ async function createJSON() {
       el.cities.sort();
       cities = cities.concat(el.cities);
     });
-    cities.sort();
+    cities.sort((a,b)=>{
+      return a.Nome < b.Nome;
+    });
   } catch (err) {
     console.log(err);
   }
